@@ -1,65 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>notsniped's bio</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div id="top-nav-bar">
-            <label id="title">notsniped's bio</label>
-            <a class="button_dark nav-bar-link" href="#">Main</a>
-            <a class="button_dark nav-bar-link" href="https://discord.gg/jjj5vYdWMM">Discord Server</a>
-            <a class="button_dark nav-bar-link" href="#links">Links</a>
-            <label class="button_dark" id="fun-fact" onclick="fun_fact()">Fun Fact</label>
-            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> <!--Used for preventing accidental cutoff of menu items on small screens-->
-        </div>
-        <center>
-            <div class="banner" id="heading_container">
-                <h1>notsniped</h1>
-                <hr>
-                <h3>I make code. Sometimes it works, sometimes it doesn't.</h3>
-            </div>
-        </center>
-        <div id="main-page-content">
-            <br>
-            <br>
-            <div class="item-card" id="about-me">
-                <label class="div-heading">About me</label>
-                <hr>
-                <ul>
-                    <li>✅ Certified dumbass</li>
-                    <li>👨 he/him | 17 years old (12th grade, PCMC)</li>
-                    <li>🇮🇳 Indian</li>
-                    <li>💻 Python/JavaScript/web developer</li>
-                    <li>🎥 YouTuber and Gamer</li>
-                    <li>🤖 Owner of isobot, and other Discord Bot Projects</li>
-                </ul>
-            </div>
-            <br>
-            <br>
-            <div class="item-card" id="links">
-                <label class="div-heading">My Links</label>
-                <hr>
-                <br>
-                <center>
-                    <div id="wrap-handler">
-                        <a class="button social-link" href="https://discord.gg/jjj5vYdWMM">Discord Server</a>
-                        <a class="button social-link" href="https://instagram.com/notsniped">Instagram</a>
-                        <a class="button social-link" href="https://github.com/notsniped">GitHub</a>
-                        <a class="button social-link" href="https://github.com/PyBotDevs">NKA (my GitHub organization)</a>
-                    </div>
-                </center>
-            </div>
-        </div>
-        <br>
-        <br>
-        <br>
-        <center>
-            <div id="footer">
-                &copy; notsniped 2023-present | This page is open-source and licensed with the GPL 3.0 license.
-            </div>
-        </center>
-    </body>
-    <script src="main.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>// snipe.matic</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+    *{box-sizing:border-box;scroll-behavior:smooth}
+    body{margin:0;background:#030814;color:#e8f1ff;font-family:Inter,sans-serif;overflow-x:hidden;background-image:radial-gradient(circle at top right,#0055ff 0%,transparent 20%),radial-gradient(circle at 20% 40%,#0033cc 0%,transparent 18%)}
+    
+    /* Navigation Base */
+    .nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 5vw;background:rgba(3,8,20,.7);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,120,255,.15);z-index:100}
+    .brand{font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+    .navlinks{display:flex;gap:12px;flex-wrap:wrap}
+    .nav a{color:#a5c8ff;text-decoration:none;padding:10px 16px;border:1px solid #1a3b5c;border-radius:999px;transition:.25s}
+    .nav a:hover{background:#0055ff;color:#fff;box-shadow:0 0 20px rgba(0,85,255,.5)}
+    
+    /* Mobile Menu Toggle (Hidden on Desktop) */
+    .menu-toggle {display:none; background:none; border:none; color:#a5c8ff; font-size:1.5rem; cursor:pointer; padding:0; transition:.25s}
+    .menu-toggle:hover {color:#fff; text-shadow:0 0 10px rgba(0,85,255,.8)}
+
+    /* Hero & Grid */
+    .hero{min-height:100vh;display:grid;place-items:center;padding:120px 5vw 40px;position:relative}
+    .hero h1{font-size:clamp(3rem,10vw,7rem);margin:0;text-shadow:0 0 18px rgba(0,100,255,.8);animation:float 6s ease-in-out infinite}
+    .hero p{max-width:680px;text-align:center;color:#9bb0c7;font-size:1.1rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;padding:2rem 5vw 6rem}
+    .tile{background:linear-gradient(180deg,rgba(10,25,45,.8),rgba(2,5,12,.95));border:1px solid rgba(0,120,255,.15);border-radius:22px;padding:24px;box-shadow:0 0 0 1px #0055ff inset,0 0 24px rgba(0,100,255,.05);transition:.35s;transform:translateY(0)}
+    .tile:hover{transform:translateY(-8px);box-shadow:0 0 28px rgba(0,120,255,.2)}
+    .tile h3{margin-top:0;color:#d6e8ff}.muted{color:#8a9fb5}
+    .links{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px}
+    .btn{display:block;text-align:center;padding:14px;border-radius:16px;background:#060f1c;border:1px solid #1a3b5c;color:#d6e8ff;text-decoration:none}
+    .reveal{opacity:0;transform:translateY(30px);transition:1s}.reveal.visible{opacity:1;transform:none}
+    .end-bar{text-align: center; font-size: 14px; user-select: none; padding-bottom: 2rem;}
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .navlinks {
+        position: absolute;
+        top: 100%;
+        right: 5vw;
+        flex-direction: column;
+        background: rgba(3, 8, 20, 0.95);
+        backdrop-filter: blur(18px);
+        border: 1px solid rgba(0, 120, 255, 0.15);
+        border-radius: 16px;
+        padding: 16px;
+        gap: 10px;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: 0.3s ease;
+        box-shadow: 0 8px 24px rgba(0, 100, 255, 0.2);
+        min-width: 180px;
+      }
+      .navlinks.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(10px);
+      }
+      .nav a {
+        text-align: center;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">snipe.matic</div>
+    <button class="menu-toggle" id="mobile-menu-btn">☰</button>
+    <div class="navlinks" id="nav-links">
+      <a href="#about">meta</a>
+      <a href="#stack">stack</a>
+      <a href="#links">links</a>
+    </div>
+  </nav>
+  
+  <section class="hero"><div><h1>Dhruv | snipe.matic</h1><p>frontend client development, server optimisation, systems builder. scroll down ▼</p></div></section>
+  
+  <section class="grid" id="about">
+    <div class="tile reveal"><h3>Meta</h3><p class="muted">18 • India • he/him • B.Tech engineering • builder</p></div>
+    <div class="tile reveal" id="stack"><h3>Stack</h3><p class="muted">Python • JavaScript • Web • Discord automation</p></div>
+    <div class="tile reveal"><h3>Projects</h3><p class="muted">isobot (rtd.), experimental bots, web tools, side systems</p></div>
+    <div class="tile reveal" id="links"><h3>Network</h3><div class="links"><a class="btn" href="https://discord.gg/b5pz8T6Yjr">Cyberspace (join the community)</a><a class="btn" href="https://instagram.com/@dhruvdoesphotography">Instagram</a><a class="btn" href="https://github.com/notsniped">GitHub</a><a class="btn" href="https://pybotdevs.github.io/web">Org</a></div></div>
+  </section>
+  
+  <section class="end-bar">
+    <p>this website is open source, and is officially licensed with the GNU GPL 3.0 standard</p>
+  </section>
+  
+  <script>
+    // Reveal Animations
+    const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('visible',e.isIntersecting)),{threshold:.18});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    
+    // Mobile Navigation Toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+    
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close mobile menu when a link is clicked
+    document.querySelectorAll('.navlinks a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+  </script>
+</body>
 </html>
